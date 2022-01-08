@@ -33,7 +33,7 @@ export default function Home() {
       if(response.status !== 200) {
         setSnackbar({ open: true, severity: "error", message: response });
       } else {
-        console.log("response from backend =", response);
+        setSnackbar({ open: true, severity: "success", message: "Your new URL is:" + response.data.url });
       }
     } else {
       setSnackbar({ open: true, severity: "error", message: "URL IS INVALID" });
