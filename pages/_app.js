@@ -18,7 +18,7 @@ export default function App({ Component, pageProps, test }) {
   return (
     <div>
       <Header nav={nav} clicks={clicks}/>
-      <Component {...pageProps} changeNav={(nav) => setNav(nav)}/>
+      <Component {...pageProps} changeNav={(nav) => setNav(nav)} refresh={() => submitButtonClicked()}/>
     </div>
   ) 
 }

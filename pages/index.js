@@ -8,7 +8,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Create() {
+export default function Create({ refresh }) {
 
   const [ url, setUrl ] = useState("");
   const [ snackbar, setSnackbar ] = useState({open: false, severity: "", message: ""});
@@ -33,6 +33,7 @@ export default function Create() {
       if(response.status !== 200) {
         setSnackbar({ open: true, severity: "error", message: response });
       } else {
+        refresh();
         setNewUrl(response.data.response.value);
       }
     } else {

@@ -4,7 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export default function ButtonAppBar({ nav, clicks }) {
   const router = useRouter();
