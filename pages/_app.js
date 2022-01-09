@@ -27,7 +27,7 @@ export default function App({ Component, pageProps, test }) {
 
   const submitButtonClicked = async () => {
     const response = await axios.get("/api/stats");
-    setClicks(response.data.clicks)
+    setClicks(response.data.clicks + 1)
   }
 
   useEffect(() => {

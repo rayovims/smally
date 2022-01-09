@@ -25,24 +25,23 @@ export default async function handler(req, res) {
 
     const { db } = await connectToDatabase();
 
-    await db.collection("urls").find({ url }).toArray((err, resp) => {
+    await db.collection("urls").find({ url }).toArray(async (err, resp) => {
         if(resp.length) {
             const obj = sendResp(resp[0].ref);
             res.status(200).json(obj);
-        }
-    })
-
-    await db.collection("urls").find({}).toArray(async (err, resp) => {
-        let id;
-        if(resp.length === 0) {
-            id = 0;
         } else {
-            id = resp[resp.length - 1].ref;
+            await db.collection("urls").find({}).toArray(async (err, resp) => {
+                let id;
+                if(resp.length === 0) {
+                    id = 0;
+                } else {
+                    id = resp[resp.length - 1].ref;
+                }
+                db.collection("urls").insertOne({ ref: id + 1, url });
+                let value = id + 1;
+                const obj = sendResp(value);
+                res.status(200).json(obj);
+            })
         }
-        db.collection("urls").insertOne({ ref: id + 1, url });
-        let value = id + 1;
-        const obj = sendResp(value);
-        res.status(200).json(obj);
     })
-
 }
