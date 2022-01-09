@@ -59,7 +59,7 @@ export default function Home() {
       <Grid container style={{marginTop: "100px"}}>
         <Grid item xs={3} />
         <Grid item xs={6}>
-          <InputLabel>Enter the URL you wish to shorten</InputLabel>
+          <InputLabel>Enter the URL you wish to shorten!</InputLabel>
           <TextField
             required
             label="URL"

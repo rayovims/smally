@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         res.status(200).json({ response: {
             status: 200,
             message: "url successfully shortened",
-            value: "http://localhost:3000/" + value
+            value: "https://smally.vercel.app/" + value
         }});
     });
 }
