@@ -30,10 +30,11 @@ export default function Home() {
   const handleClick = async () => {
     if(isValidUrl(url)) {
       const response = await axios.post("/api/url", { url });
+      console.log("response = ", response);
       if(response.status !== 200) {
         setSnackbar({ open: true, severity: "error", message: response });
       } else {
-        setSnackbar({ open: true, severity: "success", message: "Your new URL is:" + response.data.url });
+        setSnackbar({ open: true, severity: "success", message: "Your new URL is:" + response.data.response.value });
       }
     } else {
       setSnackbar({ open: true, severity: "error", message: "URL IS INVALID" });

@@ -1,5 +1,4 @@
 const { connectToDatabase } = require('../../lib/mongodb');
-const ObjectId = require('mongodb').ObjectId;
 
 export default async function handler(req, res) {
     const url = req.body.url;
@@ -8,9 +7,15 @@ export default async function handler(req, res) {
     }
 
     const { db } = await connectToDatabase();
-    // logic to handle new URL. BUT CONNECT TO DB NOW
-    const postURL = await db.collection("urls").insertOne({url})
 
-    console.log("RESP =", postURL)
-    res.status(200).json({ url: url })
+    await db.collection("urls").find({}).toArray(function(err, resp) {
+        let id = resp[resp.length - 1].ref;
+        db.collection("urls").insertOne({ ref: id + 1, url });
+        let value = id + 1;
+        res.status(200).json({ response: {
+            status: 200,
+            message: "url successfully shortened",
+            value: "http://localhost:3000/" + value
+        }});
+    });
 }
