@@ -48,9 +48,9 @@ export default function Home({ title, result, newUrl, handleClick }) {
             <Grid item xs={3} />
             <Grid item xs={6}>
                 <Typography variant="h5" textAlign={"center"}>{result}</Typography>
-                <Grid container style={{marginTop: "15px"}}>
-                    <Grid item xs={3} />
-                    <Grid item xs={6}>
+                <Grid container style={{marginTop: "15px", textAlign: "center"}}>
+                    <Grid item xs={4} />
+                    <Grid item xs={8} style={{textAlign: "center"}}>
                         <Stack direction="row" alignItems="center" gap={1}>
                             <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
                             <Tooltip title="Copy">
@@ -63,7 +63,6 @@ export default function Home({ title, result, newUrl, handleClick }) {
                             </Tooltip>
                         </Stack>
                     </Grid>
-                    <Grid item xs={3} />
                 </Grid>
             </Grid>
             <Grid item xs={3} />
