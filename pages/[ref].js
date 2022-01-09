@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
-import { Typography } from '@mui/material';
+import Typography from "@mui/material/Typography"
 
 export default function Post (props) {
   const router = useRouter(props);
@@ -32,7 +32,7 @@ export default function Post (props) {
         >
             <CircularProgress color="inherit" />
         </Backdrop>
-        <Typography variant={"h4"} textAlign={"center"} style={{marginTop: "40%"}}>{flag ? <p>Loading...</p> : <p>No Url found</p>}</Typography>
+        <Typography variant={"h4"} textAlign={"center"} style={{marginTop: "20%"}}>{flag ? <p>Loading...</p> : <p>No Url found</p>}</Typography>
         
     </div>
   )
