@@ -4,10 +4,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ nav, clicks }) {
   const router = useRouter();
-  const pages = [ "create", "retrieve" ]
+  const pages = [ "create", "retrieve" ];
 
   return (
       <AppBar style={{backgroundColor: "black"}}>
@@ -15,17 +16,28 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Welcome To Smally
           </Typography>
+          {nav
+          ?
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => router.push("/" + page)}
+                onClick={() => {
+                  if(page === "create") {
+                    router.push("/");
+                  } else {
+                    router.push("/" + page)
+                  }
+                }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
-          </Box>
+          </Box> : null }
+          {clicks
+          ?
+          <Typography>Urls Created:{" "}{clicks}</Typography> : null }
         </Toolbar>
       </AppBar>
   );

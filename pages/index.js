@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Grid, TextField, InputLabel, Button, Typography } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Header from '../components/Header';
 import axios from 'axios';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Home() {
+export default function Create() {
 
   const [ url, setUrl ] = useState("");
   const [ snackbar, setSnackbar ] = useState({open: false, severity: "", message: ""});
   const [ newUrl, setNewUrl ] = useState("");
-  const [ shortUrl, setShortUrl ] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -42,10 +40,6 @@ export default function Home() {
     }
   }
 
-  const handleRetrieve = () => {
-    
-  }
-
   return (
     <div>
       <Snackbar 
@@ -58,7 +52,6 @@ export default function Home() {
           {snackbar.message}
         </Alert>
       </Snackbar>
-      <Header />
       <Grid container style={{marginTop: "100px"}}>
         <Grid item xs={3} />
         <Grid item xs={6}>
@@ -93,26 +86,6 @@ export default function Home() {
           </Grid>
            : null }
         </Grid>
-        <Grid item xs={3} />
-        <Grid item xs={6}>
-          <InputLabel>Enter the Shortened URL to retrieve the original URL</InputLabel>
-          <TextField
-            required
-            label="URL"
-            value={shortUrl}
-            onChange={(e) => setShortUrl(e.target.value)}
-            fullWidth
-            margin='normal'
-          />
-          <Button
-            onClick={handleRetrieve}
-            variant="contained"
-            disabled={shortUrl.length === 0 ? true : false}
-          >
-            Submit
-          </Button>
-        </Grid>
-        <Grid item xs={3} />
       </Grid>
     </div>
   )

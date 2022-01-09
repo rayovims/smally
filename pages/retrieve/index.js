@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Grid, TextField, InputLabel, Button, Typography } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Header from '../../components/Header';
 import axios from 'axios';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Home() {
+export default function Retrieve() {
 
   const [ url, setUrl ] = useState("");
   const [ snackbar, setSnackbar ] = useState({open: false, severity: "", message: ""});
   const [ newUrl, setNewUrl ] = useState("");
-  const [ shortUrl, setShortUrl ] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -66,7 +64,6 @@ export default function Home() {
           {snackbar.message}
         </Alert>
       </Snackbar>
-      <Header />
       <Grid container style={{marginTop: "100px"}}>
         <Grid item xs={3} />
         <Grid item xs={6}>
