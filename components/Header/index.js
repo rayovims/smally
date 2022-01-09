@@ -36,7 +36,7 @@ export default function ButtonAppBar({ nav, clicks }) {
           </Box> : null }
           {clicks
           ?
-          <Typography>Urls Created:{" "}{clicks}</Typography> : null }
+          <Typography>URLS Created:{" "}{clicks}</Typography> : null }
         </Toolbar>
       </AppBar>
   );
