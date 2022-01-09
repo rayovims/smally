@@ -9,7 +9,9 @@ export default async function handler(req, res) {
     const { db } = await connectToDatabase();
 
     await db.collection("urls").find({ ref: parseInt(ref) }).toArray(function(err, resp) {
-
+        if(resp.length === 0) {
+            res.status(404).send("NO URL MATCHING THIS LINK");
+        }
         res.status(200).json({ response: {
             status: 200,
             message: "Ref Found!",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, TextField, InputLabel, Button } from '@mui/material';
+import { Grid, TextField, InputLabel, Button, Typography } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Header from '../components/Header';
@@ -13,6 +13,7 @@ export default function Home() {
 
   const [ url, setUrl ] = useState("");
   const [ snackbar, setSnackbar ] = useState({open: false, severity: "", message: ""});
+  const [ newUrl, setNewUrl ] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -35,6 +36,7 @@ export default function Home() {
         setSnackbar({ open: true, severity: "error", message: response });
       } else {
         setSnackbar({ open: true, severity: "success", message: "Your new URL is:" + response.data.response.value });
+        setNewUrl(response.data.response.value);
       }
     } else {
       setSnackbar({ open: true, severity: "error", message: "URL IS INVALID" });
@@ -75,6 +77,19 @@ export default function Home() {
           </Button>
         </Grid>
         <Grid item xs={3} />
+        <Grid item xs={12}>
+        {newUrl.length > 0
+        ?
+          <Grid container style={{marginTop: "50px"}}>
+            <Grid item xs={3} />
+            <Grid item xs={6}>
+              <Typography variant="h5" textAlign={"center"}>Your new Shortened URL is</Typography>
+              <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
+            </Grid>
+            <Grid item xs={3} />
+          </Grid>
+           : null }
+        </Grid>
       </Grid>
     </div>
   )
