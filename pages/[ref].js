@@ -11,7 +11,7 @@ export default function Post () {
     if(ref !== undefined) {
         const response = await axios.post("/api/redirect", { ref });
         if(typeof window !== "undefined") {
-            if(response.status === 200) {
+            if(response.data.response.status === 200) {
                 window.location.href = response.data.response.value
             } else {
                 setFlag(false);
