@@ -14,6 +14,7 @@ export default function Home() {
   const [ url, setUrl ] = useState("");
   const [ snackbar, setSnackbar ] = useState({open: false, severity: "", message: ""});
   const [ newUrl, setNewUrl ] = useState("");
+  const [ shortUrl, setShortUrl ] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -39,6 +40,10 @@ export default function Home() {
     } else {
       setSnackbar({ open: true, severity: "error", message: "URL IS INVALID" });
     }
+  }
+
+  const handleRetrieve = () => {
+    
   }
 
   return (
@@ -75,7 +80,7 @@ export default function Home() {
           </Button>
         </Grid>
         <Grid item xs={3} />
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{marginBottom: "50px"}}>
         {newUrl.length > 0
         ?
           <Grid container style={{marginTop: "50px"}}>
@@ -88,6 +93,26 @@ export default function Home() {
           </Grid>
            : null }
         </Grid>
+        <Grid item xs={3} />
+        <Grid item xs={6}>
+          <InputLabel>Enter the Shortened URL to retrieve the original URL</InputLabel>
+          <TextField
+            required
+            label="URL"
+            value={shortUrl}
+            onChange={(e) => setShortUrl(e.target.value)}
+            fullWidth
+            margin='normal'
+          />
+          <Button
+            onClick={handleRetrieve}
+            variant="contained"
+            disabled={shortUrl.length === 0 ? true : false}
+          >
+            Submit
+          </Button>
+        </Grid>
+        <Grid item xs={3} />
       </Grid>
     </div>
   )

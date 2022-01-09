@@ -3,7 +3,7 @@ const { connectToDatabase } = require('../../lib/mongodb');
 export default async function handler(req, res) {
     const ref = req.body.ref;
     if(!ref) {
-        res.status(422).send("NO REF PROVIDED")
+        res.status(422).send("NO REF PROVIDED");
     }
     
     const { db } = await connectToDatabase();
