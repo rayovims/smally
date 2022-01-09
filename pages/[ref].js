@@ -1,17 +1,16 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import CircularProgress from '@mui/material/CircularProgress';
-import Backdrop from '@mui/material/Backdrop';
 import Typography from "@mui/material/Typography"
 
-export default function Post (props) {
-  const router = useRouter(props);
+export default function Post ({ changeNav, spinner }) {
+  const router = useRouter();
   const { ref } = router.query;
   const [ flag, setFlag ] = useState(true);
 
   useEffect(async () => {
-    props.changeNav(false)
+    changeNav(false);
+    spinner(true);
     if(ref !== undefined) {
         const response = await axios.post("/api/redirect", { ref });
         if(typeof window !== "undefined") {
@@ -19,6 +18,7 @@ export default function Post (props) {
                 window.location.href = response.data.response.value
             } else {
                 setFlag(false);
+                spinner(false)
             }
         }
     }
@@ -26,12 +26,6 @@ export default function Post (props) {
 
   return (
     <div>
-        <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={flag}
-        >
-            <CircularProgress color="inherit" />
-        </Backdrop>
         <Typography variant={"h4"} textAlign={"center"} style={{marginTop: "20%"}}>{flag ? <p>Loading...</p> : <p>No Url found</p>}</Typography>
         
     </div>

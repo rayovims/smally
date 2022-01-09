@@ -3,11 +3,12 @@ import Home from '../../components/Home';
 import axios from 'axios';
 import { isValidUrl } from '../../global';
 
-export default function Retrieve({ handleSnackBar }) {
+export default function Retrieve({ handleSnackBar, spinner }) {
   const [ newUrl, setNewUrl ] = useState("");
 
   const handleClick = async (url) => {
     if(isValidUrl(url)) {
+        spinner(true);
         let ref;
         if(url.includes("localhost") || url.includes("smally.vercel.app")) {
             let _url = url.substring(8);
@@ -17,13 +18,14 @@ export default function Retrieve({ handleSnackBar }) {
             ref = -1;
         }
         const response = await axios.post("/api/retrieve", { ref });
+        spinner(false);
         if(response.status !== 200) {
-        handleSnackBar({ open: true, severity: "error", message: response });
+          handleSnackBar({ open: true, severity: "error", message: response });
         } else {
             if(response.data.response.status === 200) {
-            setNewUrl(response.data.response.value);
+              setNewUrl(response.data.response.value);
             } else {
-            setNewUrl("NO Url Found");
+              setNewUrl("NO Url Found");
             }
         }
     } else {
