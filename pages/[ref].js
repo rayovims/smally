@@ -5,8 +5,7 @@ import axios from 'axios';
 export default function Post () {
   const router = useRouter();
   const { ref } = router.query;
-  const [ flag, setFlag ] = useState(false);
-
+  const [ flag, setFlag ] = useState(true);
 
   useEffect(async () => {
     if(ref !== undefined) {
@@ -15,7 +14,7 @@ export default function Post () {
             if(response.status === 200) {
                 window.location.href = response.data.response.value
             } else {
-                setFlag(true);
+                setFlag(false);
             }
         }
     }

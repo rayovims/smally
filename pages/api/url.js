@@ -12,10 +12,16 @@ export default async function handler(req, res) {
         let id = resp[resp.length - 1].ref;
         db.collection("urls").insertOne({ ref: id + 1, url });
         let value = id + 1;
+        let _url = "";
+        if(process.env.NODE_ENV === "development") {
+            _url = "http://localhost:3000/" + value;
+        } else {
+            _url = "https://smally.vercel.app/" + value;
+        }
         res.status(200).json({ response: {
             status: 200,
             message: "url successfully shortened",
-            value: "https://smally.vercel.app/" + value
+            value: _url
         }});
     });
 }
