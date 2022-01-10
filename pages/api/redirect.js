@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     
     const { db } = await connectToDatabase();
 
-    await db.collection("urls").find({ ref: parseInt(ref) }).toArray(function(err, resp) {
+    await db.collection("urls").find({ ref }).toArray(function(err, resp) {
         if(resp.length === 0) {
-            res.status(200).json({ response: {
+            res.status(302).json({ response: {
                 status: 404,
                 message: "Ref Not Found!",
                 value: null

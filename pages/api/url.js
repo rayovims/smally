@@ -1,3 +1,5 @@
+import { decode, encode } from '../../global';
+
 const { connectToDatabase } = require('../../lib/mongodb');
 
 const sendResp = (id) => {
@@ -29,16 +31,18 @@ export default async function handler(req, res) {
         if(resp.length) {
             const obj = sendResp(resp[0].ref);
             res.status(200).json(obj);
+            return;
         } else {
             await db.collection("urls").find({}).toArray(async (err, resp) => {
                 let id;
                 if(resp.length === 0) {
-                    id = 0;
+                    id = 1000;
+                    id = encode(id);
                 } else {
-                    id = resp[resp.length - 1].ref;
+                    id = encode(decode(resp[resp.length - 1].ref) + 1);
                 }
-                db.collection("urls").insertOne({ ref: id + 1, url });
-                let value = id + 1;
+                db.collection("urls").insertOne({ ref: id, url });
+                let value = id;
                 const obj = sendResp(value);
                 res.status(200).json(obj);
             })
