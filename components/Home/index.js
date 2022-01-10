@@ -42,33 +42,25 @@ export default function Home({ title, result, newUrl, handleClick, handleSnackBa
           </Button>
         </Grid>
         <Grid item xs={3} />
-        <Grid item xs={12} style={{marginBottom: "50px"}}>
-        {newUrl.length > 0
-        ?
-          <Grid container style={{marginTop: "50px"}}>
-            <Grid item xs={3} />
-            <Grid item xs={6}>
-                <Typography variant="h5" textAlign={"center"}>{result}</Typography>
-                <Grid container style={{marginTop: "15px", textAlign: "center"}}>
-                    <Grid item xs={3} />
-                    <Grid item xs={6} style={{textAlign: "center"}}>
-                          <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
-                          {newUrl !== "NO Url Found"
-                          ?
-                            <Tooltip title="Copy">
-                                <IconButton 
-                                    aria-label="Copy"
-                                    onClick={handleCopy}
-                                >
-                                    <ContentCopyIcon />
-                                </IconButton>
-                            </Tooltip> : null }
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item xs={3} />
-          </Grid>
-           : null }
+        <Grid item xs={12} style={{marginTop: "50px", textAlign: "center"}}>
+          {newUrl.length > 0
+          ?
+          <div>
+            <Typography variant="h5" textAlign={"center"}>{result}</Typography>
+            <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
+            <div>
+              { newUrl !== "NO Url Found"
+              ?
+                <Tooltip title="Copy">
+                    <IconButton 
+                        aria-label="Copy"
+                        onClick={handleCopy}
+                    >
+                        <ContentCopyIcon />
+                    </IconButton>
+                </Tooltip> : null }
+            </div>
+          </div> : null }
         </Grid>
       </Grid>
     </div>
