@@ -24,7 +24,7 @@ export default function Create({ refresh, handleSnackBar, spinner }) {
   }
   return (
     <div>
-      <Home  title={"Enter the URL you wish to shorten"} result={"Your new Shortened URL Is"} newUrl={newUrl} handleClick={(url) => handleClick(url)}/>
+      <Home  title={"Enter the URL you wish to shorten"} result={"Your new Shortened URL Is"} newUrl={newUrl} handleClick={(url) => handleClick(url)} handleSnackBar={(snack) => handleSnackBar(snack)}/>
     </div>
   )
 }

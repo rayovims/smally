@@ -36,8 +36,7 @@ export default async function handler(req, res) {
             await db.collection("urls").find({}).toArray(async (err, resp) => {
                 let id;
                 if(resp.length === 0) {
-                    id = 1000;
-                    id = encode(id);
+                    id = encode(1000);
                 } else {
                     id = encode(decode(resp[resp.length - 1].ref) + 1);
                 }

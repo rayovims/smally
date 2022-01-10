@@ -35,7 +35,7 @@ export default function Retrieve({ handleSnackBar, spinner }) {
 
   return (
     <div>
-      <Home  title={"Enter the shortened URL to retrieve the orginal URL"} result={"The Original URL Is"} newUrl={newUrl} handleClick={(url) => handleClick(url)}/>
+      <Home  title={"Enter the shortened URL to retrieve the orginal URL"} result={"The Original URL Is"} newUrl={newUrl} handleClick={(url) => handleClick(url)} handleSnackBar={(snack) => handleSnackBar(snack)}/>
     </div>
   )
 }

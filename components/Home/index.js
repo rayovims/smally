@@ -8,13 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Tooltip from '@mui/material/Tooltip';
 import Stack from "@mui/material/Stack";
-export default function Home({ title, result, newUrl, handleClick }) {
+export default function Home({ title, result, newUrl, handleClick, handleSnackBar }) {
 
   const [ url, setUrl ] = useState("");
 
   const handleCopy = () => {
       if(typeof window !== "undefined") {
-          window.navigator.clipboard.writeText(newUrl);
+        window.navigator.clipboard.writeText(newUrl);
+        handleSnackBar({ open: true, severity: "success", message: "URL COPIED" })
       }
   }
 
@@ -49,10 +50,11 @@ export default function Home({ title, result, newUrl, handleClick }) {
             <Grid item xs={6}>
                 <Typography variant="h5" textAlign={"center"}>{result}</Typography>
                 <Grid container style={{marginTop: "15px", textAlign: "center"}}>
-                    <Grid item xs={4} />
-                    <Grid item xs={8} style={{textAlign: "center"}}>
-                        <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
+                    <Grid item xs={3} />
+                    <Grid item xs={6} style={{textAlign: "center"}}>
+                          <Typography variant="h5" textAlign={"center"}>{newUrl}</Typography>
+                          {newUrl !== "NO Url Found"
+                          ?
                             <Tooltip title="Copy">
                                 <IconButton 
                                     aria-label="Copy"
@@ -60,8 +62,7 @@ export default function Home({ title, result, newUrl, handleClick }) {
                                 >
                                     <ContentCopyIcon />
                                 </IconButton>
-                            </Tooltip>
-                        </Stack>
+                            </Tooltip> : null }
                     </Grid>
                 </Grid>
             </Grid>

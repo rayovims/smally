@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
     const { db } = await connectToDatabase();
 
-    await db.collection("urls").find({ ref: parseInt(ref) }).toArray((err, resp) => {
+    await db.collection("urls").find({ ref }).toArray((err, resp) => {
         if(resp.length) {
             res.status(200).json({ response: {
                 status: 200,
